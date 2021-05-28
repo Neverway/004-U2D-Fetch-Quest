@@ -35,10 +35,6 @@ public class System_SaveManager : MonoBehaviour
     {
         questLists = GameObject.FindGameObjectsWithTag("QuestList");
         quests = GameObject.FindGameObjectsWithTag("Quest");
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            PreSaveData();
-        }
     }
 
 
