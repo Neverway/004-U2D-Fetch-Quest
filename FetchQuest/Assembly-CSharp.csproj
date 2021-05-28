@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Button_Destroy.cs" />
      <Compile Include="Assets\Scripts\Button_Instantiate.cs" />
      <Compile Include="Assets\Scripts\Button_LoadScene.cs" />
+     <Compile Include="Assets\Scripts\Button_QuestBoardCreator.cs" />
      <Compile Include="Assets\Scripts\OpenInFileBrowser.cs" />
      <Compile Include="Assets\Scripts\QuestBoard_Data.cs" />
      <Compile Include="Assets\Scripts\QuestList_Data.cs" />

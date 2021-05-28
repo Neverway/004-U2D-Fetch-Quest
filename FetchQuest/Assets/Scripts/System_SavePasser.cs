@@ -25,4 +25,14 @@ public class System_SavePasser : MonoBehaviour
             saveManager.Load();
         }
     }
+
+    public void Save()
+    {
+        saveManager.PreSaveData();
+    }
+
+    public void Load()
+    {
+        saveManager.Load();
+    }
 }
