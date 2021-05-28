@@ -17,10 +17,11 @@ public class System_QuestOptions : MonoBehaviour
     public Dropdown priorityObject;         // The UI text object that displays and stores the quests priority
     public InputField descriptionObject;    // The UI text object that displays and stores the quests description
     public GameObject currentQuestTarget;   // Set by the Quest_Data script, this is how the quest edit menu knows wich quest it's editing
+    public GameObject parentList;           // Set by the Quest_Data script, this is how the quest edit menu knows wich questlist the quest is a child of
 
 
     // A function to send the current quests data to the quest edit menu
-    public void PassData(string title, string dueDate, string dueTime, int priority, string description)
+    public void PassData(string title, string dueDate, string dueTime, int priority, string description, GameObject parent)
     {
         questEditMenu.SetActive(true);
         titleObject.text = title;
@@ -28,6 +29,7 @@ public class System_QuestOptions : MonoBehaviour
         dueTimeObject.text = dueTime;
         priorityObject.SetValueWithoutNotify(priority);
         descriptionObject.text = description;
+        parentList = parent;
     }
 
 
@@ -40,5 +42,11 @@ public class System_QuestOptions : MonoBehaviour
         currentQuestTarget.GetComponent<Quest_Data>().priority = priorityObject.value;          // Send the quest edit menu priority to the quest
         currentQuestTarget.GetComponent<Quest_Data>().description = descriptionObject.text;     // Send the quest edit menu description to the quest
         currentQuestTarget = null;                                                              // Clear the currently editing quest since it's no longer editing a quest
+    }
+
+    public void DeleteQuest()
+    {
+        Destroy(currentQuestTarget);
+        parentList.GetComponent<QuestList_DataPass>().RemoveQuest();
     }
 }

@@ -10,4 +10,5 @@ using UnityEngine;
 public class System_ListState : MonoBehaviour
 {
     public bool properlyParented;   // Is the questlist in the proper place in the heirarchy
+    public GameObject parent;
 }

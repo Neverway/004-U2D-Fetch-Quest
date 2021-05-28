@@ -503,7 +503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 42d58dee058a9fa35a4afdbb49052788, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0141b32bd9f35cd8a3214b43cf4b611, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -673,6 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   properlyParented: 0
+  parent: {fileID: 0}
 --- !u!114 &5597962101097982280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +855,7 @@ GameObject:
   - component: {fileID: 1790404970713651238}
   - component: {fileID: 1790404970713651236}
   - component: {fileID: 1790404970713651239}
+  - component: {fileID: 2733842254245108034}
   m_Layer: 5
   m_Name: Layout
   m_TagString: Untagged
@@ -919,6 +921,19 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 1
+--- !u!114 &2733842254245108034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790404970713651233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ac73f46422d0f3ba806c24dd69df8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questListData: {fileID: 5597962101097982280}
 --- !u!1 &1790404970855686727
 GameObject:
   m_ObjectHideFlags: 0

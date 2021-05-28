@@ -42,6 +42,7 @@ public class Button_Instantiate : MonoBehaviour
             {
                 obj.transform.SetParent(parent.transform, false);               // Set the prefabs parent
                 obj.GetComponent<System_ListState>().properlyParented = true;   // Label the prefab as being properly parented
+                obj.GetComponent<System_ListState>().parent = parent;           // Store the prefabs parent
             }
         }
     }

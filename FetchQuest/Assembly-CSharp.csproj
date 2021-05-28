@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\OpenInFileBrowser.cs" />
      <Compile Include="Assets\Scripts\QuestBoard_Data.cs" />
      <Compile Include="Assets\Scripts\QuestList_Data.cs" />
+     <Compile Include="Assets\Scripts\QuestList_DataPass.cs" />
      <Compile Include="Assets\Scripts\Quest_Data.cs" />
      <Compile Include="Assets\Scripts\System_ListState.cs" />
      <Compile Include="Assets\Scripts\System_Persistent.cs" />

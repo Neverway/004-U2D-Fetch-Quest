@@ -16,6 +16,7 @@ public class Quest_Data : MonoBehaviour
     public string dueTime;                      // Variable to store the due time of the current quest
     public int priority;                        // Variable to store the priority of the current quest
     public string description;                  // Variable to store the description of the current quest
+    public GameObject parent;
     private System_QuestOptions questOptions;   // Get a reference to the script that controlls the quest edit menu
 
     public string bufferedName;
@@ -51,7 +52,8 @@ public class Quest_Data : MonoBehaviour
     // Pass the quests information to the quest edit menu
     public void PassQuestData()
     {
+        parent = gameObject.GetComponent<System_ListState>().parent;
         questOptions.currentQuestTarget = gameObject;                                   // Set the current quest prefab as the one that is being edited
-        questOptions.PassData(titleObject.text, dueDate, dueTime, priority, description);    // Send the quest prefabs data to the quest edit menu
+        questOptions.PassData(titleObject.text, dueDate, dueTime, priority, description, parent);    // Send the quest prefabs data to the quest edit menu
     }
 }

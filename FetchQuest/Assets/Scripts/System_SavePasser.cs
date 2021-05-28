@@ -35,4 +35,9 @@ public class System_SavePasser : MonoBehaviour
     {
         saveManager.Load();
     }
+
+    public void Delete()
+    {
+        saveManager.DeleteSaveProfile();
+    }
 }
