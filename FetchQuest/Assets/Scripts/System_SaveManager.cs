@@ -14,17 +14,20 @@ using UnityEngine;
 public class System_SaveManager : MonoBehaviour
 {
     public QuestLogData activeSave;
-    [Header ("Runtime Variables")]
+    [Header("Runtime Variables")]
     public bool hasLoaded;
     public GameObject[] questLists;
     public GameObject[] quests;
+    public GameObject[] questBoards;
     public Button_Instantiate newQuestList;
     public Button_Instantiate newQuest;
+    public Button_Instantiate newEntry;
+    public string[] saveFiles;
 
 
     public void Start()
     {
-        Load();
+        //Load();
     }
 
 
@@ -69,6 +72,21 @@ public class System_SaveManager : MonoBehaviour
         StartCoroutine("SaveDelay");
     }
 
+    IEnumerator FinishQuestBoards()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        if (activeSave.boardName.Length > 0)
+        {
+            for (int i = 0; i < activeSave.boardName.Length; i++)
+            {
+                string dataPath = Application.persistentDataPath;
+                activeSave.boardName[i] = saveFiles[i].Replace(dataPath + "/", "");
+                activeSave.boardName[i] = activeSave.boardName[i].Replace(".fqsp", "");
+                questBoards[i].GetComponent<QuestBoard_Data>().bufferedName = activeSave.boardName[i]; // Load the quest list names
+            }
+        }
+    }
 
     IEnumerator FinishPreLoadData()
     {
@@ -101,6 +119,19 @@ public class System_SaveManager : MonoBehaviour
         }
     }
 
+    public void findSaveFiles()
+    {
+        string dataPath = Application.persistentDataPath;
+        saveFiles = System.IO.Directory.GetFiles(dataPath, "*.fqsp");
+
+        for (int i = 0; i < saveFiles.Length; i++)
+        {
+            newEntry.InstantiateObject();
+        }
+        questBoards = GameObject.FindGameObjectsWithTag("QuestBoard");
+        System.Array.Resize(ref activeSave.boardName, questBoards.Length);
+        StartCoroutine("FinishQuestBoards");
+    }
 
     public void PreSaveData()
     {
@@ -173,7 +204,9 @@ public class System_SaveManager : MonoBehaviour
     public class QuestLogData
     {
         public string saveProfileName;
-        [Header ("Lists")]
+        [Header("Boards")]
+        public string[] boardName; // The title of the list
+        [Header("Lists")]
         public string[] listName; // The title of the list
         public int[] listPosition; // The position of the list in the menu
         public int[] questInlist; // The position of the list in the menu

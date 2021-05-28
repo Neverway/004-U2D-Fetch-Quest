@@ -15,11 +15,13 @@ public class System_Persistent : MonoBehaviour
     }
 
 
-    void Update()
+    void Awake()
     {
-        if (GameObject.FindWithTag("DestroyPresistentOverworldObjects"))
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("DestroyPresistentOverworldObjects");
+
+        if (objs.Length > 1)
         {
-            Destroy(this); // Delete any duplicates of this object so you don't have a stack when switching back and forth between a scene that has the original
+            Destroy(gameObject);
         }
     }
 }

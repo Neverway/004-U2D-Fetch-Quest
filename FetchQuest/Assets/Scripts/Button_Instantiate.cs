@@ -11,7 +11,7 @@ public class Button_Instantiate : MonoBehaviour
 {
     public GameObject UIPrefab;             // The prefab to spawn when the button is pressed
     public GameObject parent;               // The object that the new prefab should be parented to
-    [Header ("1 - QuestList, 2 - Quest"), Range (1,2)]
+    [Header ("1 - QuestList, 2 - Quest, 3 - QuestBoard"), Range (1,3)]
     public int type;                        // Which menu object is it trying to spawn
     private GameObject[] SimilarPrefabs;    // Find similar prefabs so they can be properly parented
 
@@ -29,6 +29,10 @@ public class Button_Instantiate : MonoBehaviour
         else if (type == 2)
         {
             SimilarPrefabs = GameObject.FindGameObjectsWithTag("Quest");
+        }
+        else if (type == 3)
+        {
+            SimilarPrefabs = GameObject.FindGameObjectsWithTag("QuestBoard");
         }
 
         // Properly parent the unparented prefabs

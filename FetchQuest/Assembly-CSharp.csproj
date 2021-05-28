@@ -11,7 +11,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B7ED2BFD-FBC1-5DD2-F5E6-7CCF4E361DE7}</ProjectGuid>
+    <ProjectGuid>{5634DC29-EA5B-3650-4056-69E485D99739}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,12 +58,15 @@
      <Compile Include="Assets\Scripts\Button_Destroy.cs" />
      <Compile Include="Assets\Scripts\Button_Instantiate.cs" />
      <Compile Include="Assets\Scripts\Button_LoadScene.cs" />
+     <Compile Include="Assets\Scripts\OpenInFileBrowser.cs" />
+     <Compile Include="Assets\Scripts\QuestBoard_Data.cs" />
      <Compile Include="Assets\Scripts\QuestList_Data.cs" />
      <Compile Include="Assets\Scripts\Quest_Data.cs" />
      <Compile Include="Assets\Scripts\System_ListState.cs" />
      <Compile Include="Assets\Scripts\System_Persistent.cs" />
      <Compile Include="Assets\Scripts\System_QuestOptions.cs" />
      <Compile Include="Assets\Scripts\System_SaveManager.cs" />
+     <Compile Include="Assets\Scripts\System_SavePasser.cs" />
      <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
@@ -611,85 +614,85 @@
  <HintPath>/home/lizband_ucc/Unity/Hub/Editor/2019.4.20f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Animation.Runtime">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.SpriteShape.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Path.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Animation.Triangle.Runtime">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="PsdPlugin">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Mathematics">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Psdimporter.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.InternalAPIEngineBridge.001">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Sprite.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Common.Runtime">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Tilemap.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.SpriteShape.Runtime">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Animation.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Mathematics.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Common.Editor">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.InternalAPIEditorBridge.001">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest!/FetchQuest!/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>/home/lizband_ucc/Documents/Neverway/Software/FetchQuest/FetchQuest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
