@@ -7992,6 +7992,7 @@ GameObject:
   - component: {fileID: 1410458831}
   - component: {fileID: 1410458830}
   - component: {fileID: 1410458829}
+  - component: {fileID: 1410458833}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -8080,7 +8081,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quest List
+  m_Text: Quest Board
 --- !u!222 &1410458832
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8089,6 +8090,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410458827}
   m_CullTransparentMesh: 0
+--- !u!114 &1410458833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410458827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58ac38d21a7ecf04cae314f9119ba301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 1410458831}
 --- !u!1 &1437876502
 GameObject:
   m_ObjectHideFlags: 0

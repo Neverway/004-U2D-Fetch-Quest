@@ -33,8 +33,8 @@ public class System_SaveManager : MonoBehaviour
 
     public void Update()
     {
-        questLists = GameObject.FindGameObjectsWithTag("QuestList");
-        quests = GameObject.FindGameObjectsWithTag("Quest");
+        //questLists = GameObject.FindGameObjectsWithTag("QuestList");
+        //quests = GameObject.FindGameObjectsWithTag("Quest");
     }
 
 
@@ -149,6 +149,7 @@ public class System_SaveManager : MonoBehaviour
             newQuestList.InstantiateObject();
         }
         questLists = GameObject.FindGameObjectsWithTag("QuestList");
+        quests = GameObject.FindGameObjectsWithTag("Quest");
         System.Array.Resize(ref activeSave.listName, questLists.Length);
         System.Array.Resize(ref activeSave.listPosition, questLists.Length);
         System.Array.Resize(ref activeSave.questInlist, questLists.Length);

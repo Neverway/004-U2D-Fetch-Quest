@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\System_QuestOptions.cs" />
      <Compile Include="Assets\Scripts\System_SaveManager.cs" />
      <Compile Include="Assets\Scripts\System_SavePasser.cs" />
+     <Compile Include="Assets\Scripts\System_ShowCurrentSaveProfile.cs" />
      <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
