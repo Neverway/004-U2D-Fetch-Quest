@@ -23,24 +23,24 @@ public class System_SaveManager : MonoBehaviour
     public Button_Instantiate newQuest;
     public Button_Instantiate newEntry;
     public string[] saveFiles;
+    public int questNameID;
 
 
-    public void Start()
+    public void Awake()
     {
-        //Load();
+        questNameID = 0;
     }
 
 
     public void Update()
     {
-        //questLists = GameObject.FindGameObjectsWithTag("QuestList");
-        //quests = GameObject.FindGameObjectsWithTag("Quest");
     }
 
 
     IEnumerator SaveDelay()
     {
         yield return new WaitForSeconds(0.4f);
+        questNameID = 0;
         Save();
     }
 
@@ -52,18 +52,20 @@ public class System_SaveManager : MonoBehaviour
         {
             for (int i = 0; i < questLists.Length; i++)
             {
-                activeSave.listPosition[i] = i;
-                activeSave.listName[i] = questLists[i].GetComponent<QuestList_Data>().questlistName.text; // Save the quest list names
-                activeSave.questInlist[i] = questLists[i].GetComponent<QuestList_Data>().questsInList; // Save the number of quests in a quest list
+                activeSave.questListData[i].listName = questLists[i].GetComponent<QuestList_Data>().questlistName.text; // Save the quest list names
+                System.Array.Resize(ref activeSave.questListData[i].questData, questLists[i].GetComponent<QuestList_Data>().questsInList);
+
+                for (int ii = 0; ii < activeSave.questListData[i].questData.Length; ii++)
+                {
+                    activeSave.questListData[i].questData[ii].questName = quests[questNameID].GetComponent<Quest_Data>().titleObject.text; // Save the quest list names
+                    questNameID++;
+                }
             }
         }
 
         if (quests.Length > 0)
         {
-            for (int i = 0; i < quests.Length; i++)
-            {
-                activeSave.questName[i] = quests[i].GetComponent<Quest_Data>().titleObject.text; // Save the quest names
-            }
+
         }
         StartCoroutine("SaveDelay");
     }
@@ -88,12 +90,18 @@ public class System_SaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        if (activeSave.listName.Length > 0)
+        if (activeSave.questListData.Length > 0)
         {
-            for (int i = 0; i < activeSave.listName.Length; i++)
+            for (int i = 0; i < activeSave.questListData.Length; i++)
             {
-                questLists[i].GetComponent<QuestList_Data>().bufferedName = activeSave.listName[i]; // Load the quest list names
-                questLists[i].GetComponent<QuestList_Data>().questsInList = activeSave.questInlist[i]; // Load the number of quests in a quest list
+                questLists[i].GetComponent<QuestList_Data>().bufferedName = activeSave.questListData[i].listName; // Load the quest list names
+                //questLists[i].GetComponent<QuestList_Data>().questsInList = ;// !!!!!!!!!!!!!!!!!!!!!
+                //System.Array.Resize(ref activeSave.questListData[i].questData, questLists[i].GetComponent<QuestList_Data>().questsInList);
+                for (int ii = 0; ii < activeSave.questListData[i].questData.Length; ii++)
+                {
+                    questLists[i].GetComponent<QuestList_Data>().newQuestButton.InstantiateObject();
+                    questLists[i].GetComponent<QuestList_Data>().questsInListBuffered += 1;
+                }
             }
         }
     }
@@ -103,16 +111,23 @@ public class System_SaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
         quests = GameObject.FindGameObjectsWithTag("Quest");
-        print("ql:" + quests.Length);
-        System.Array.Resize(ref activeSave.questName, quests.Length);
-
-        if (quests.Length > 0)
+        if (activeSave.questListData.Length > 0)
         {
-            for (int i = 0; i < activeSave.questName.Length; i++)
+            for (int i = 0; i < activeSave.questListData.Length; i++)
             {
-                quests[i].GetComponent<Quest_Data>().bufferedName = activeSave.questName[i]; // Load the quest list names
+                //for (int ii = 0; ii < activeSave.questListData[i].questData.Length; ii++)
+                //{
+                //    quests[ii].GetComponent<Quest_Data>().bufferedName = activeSave.questListData[i].questData[ii].questName; // Load the quest names
+                //}
+
+                for (int ii = 0; ii < activeSave.questListData[i].questData.Length; ii++)
+                {
+                    quests[questNameID].GetComponent<Quest_Data>().bufferedName = activeSave.questListData[i].questData[ii].questName; // Load the quest list names
+                    questNameID++;
+                }
             }
         }
+        questNameID = 0;
     }
 
     public void findSaveFiles()
@@ -131,28 +146,25 @@ public class System_SaveManager : MonoBehaviour
 
     public void PreSaveData()
     {
+        questNameID = 0;
         questLists = GameObject.FindGameObjectsWithTag("QuestList");
         quests = GameObject.FindGameObjectsWithTag("Quest");
-        System.Array.Resize(ref activeSave.listName, questLists.Length);
-        System.Array.Resize(ref activeSave.listPosition, questLists.Length);
-        System.Array.Resize(ref activeSave.questInlist, questLists.Length);
-
-        System.Array.Resize(ref activeSave.questName, quests.Length);
+        System.Array.Resize(ref activeSave.questListData, questLists.Length);
         StartCoroutine("FinishPreSaveData");
     }
 
 
     public void PreLoadData()
     {
-        for (int i = 0; i < activeSave.listName.Length; i++)
+        for (int i = 0; i < activeSave.questListData.Length; i++)
         {
             newQuestList.InstantiateObject();
         }
         questLists = GameObject.FindGameObjectsWithTag("QuestList");
         quests = GameObject.FindGameObjectsWithTag("Quest");
-        System.Array.Resize(ref activeSave.listName, questLists.Length);
-        System.Array.Resize(ref activeSave.listPosition, questLists.Length);
-        System.Array.Resize(ref activeSave.questInlist, questLists.Length);
+        //System.Array.Resize(ref activeSave.listName, questLists.Length);
+        //System.Array.Resize(ref activeSave.listPosition, questLists.Length);
+        //System.Array.Resize(ref activeSave.questInlist, questLists.Length);
         StartCoroutine("FinishPreLoadData");
         StartCoroutine("FinishPreLoadData2");
     }
@@ -161,6 +173,7 @@ public class System_SaveManager : MonoBehaviour
     // Save the game data to the current save profile
     public void Save()
     {
+        questNameID = 0;
         string dataPath = Application.persistentDataPath;
         var serializer = new XmlSerializer(typeof(QuestLogData));
         var stream = new FileStream(dataPath + "/" + activeSave.saveProfileName + ".fqsp", FileMode.Create);
@@ -204,12 +217,27 @@ public class System_SaveManager : MonoBehaviour
         [Header("Boards")]
         public string[] boardName; // The title of the list
         [Header("Lists")]
-        public string[] listName; // The title of the list
-        public int[] listPosition; // The position of the list in the menu
-        public int[] questInlist; // The position of the list in the menu
-        [Header("Quests")]
-        public string[] questName; // The title of the list
-        //public QuestData[] questData;
+        //public string[] listName; // The title of the list
+        //public int[] listPosition; // The position of the list in the menu
+        //public int[] questInlist; // The position of the list in the menu
+        //[Header("Quests")]
+        //public string[] questName; // The title of the list
+        public QuestListData[] questListData;
+    }
+
+    [System.Serializable]
+    public class QuestListData
+    {
+        public string listName; // The title of the list
+        //public int listPosition; // The position of the list in the menu
+        public QuestData[] questData;
+    }
+
+    [System.Serializable]
+    public class QuestData
+    {
+        public string questName; // The title of the list
+        //public int questPosition; // The position of the list in the menu
     }
 
     //[System.Serializable]

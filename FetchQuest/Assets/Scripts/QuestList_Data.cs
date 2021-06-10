@@ -13,6 +13,7 @@ public class QuestList_Data : MonoBehaviour
 {
     public InputField questlistName;            // The UI text object that displays and stores the questlists name
     public int questsInList;                    // The UI text object that displays and stores the questlists name
+    public int questsInListBuffered;                    // The UI text object that displays and stores the questlists name
     public string bufferedName;                 // Store the questlists name when loading the lists so it can be properly called without being imediatly overwritten
     public Button_Instantiate newQuestButton;
 
@@ -35,6 +36,7 @@ public class QuestList_Data : MonoBehaviour
     IEnumerator firstPassDelay()
     {
         yield return new WaitForSeconds(1f);
+        questsInList = questsInListBuffered;
         trueFirstPass = false;
         firstPass = false;
     }
@@ -43,20 +45,20 @@ public class QuestList_Data : MonoBehaviour
     // When loading a quest file, set the questlists name
     void Update()
     {
-        if (saveManager.hasLoaded && trueFirstPass)
-        {
-            print("1");
-            if (questsInList > 0)
-            {
-                print("2");
-                for (int i = 0; i < questsInList; i++)
-                {
-                    newQuestButton.InstantiateObject();
-                    print("3");
-                }
-                trueFirstPass = false;
-            }
-        }
+        //if (saveManager.hasLoaded && trueFirstPass)
+        //{
+        //    print("1");
+        //    if (questsInList > 0)
+        //    {
+        //        print("2");
+        //        for (int i = 0; i < questsInList; i++)
+        //        {
+        //            newQuestButton.InstantiateObject();
+        //            print("3");
+        //        }
+        //        trueFirstPass = false;
+        //    }
+        //}
         if (saveManager.hasLoaded && firstPass)
         {
             questlistName.text = bufferedName;
