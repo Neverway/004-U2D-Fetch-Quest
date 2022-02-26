@@ -5,6 +5,7 @@
 //
 //=============================================================================
 
+using System;
 using System.IO;
 using System.Collections;
 using System.Xml.Serialization;
@@ -13,241 +14,109 @@ using UnityEngine;
 
 public class System_SaveManager : MonoBehaviour
 {
-    public QuestLogData activeSave;
-    [Header("Runtime Variables")]
-    public bool hasLoaded;
-    public GameObject[] questLists;
-    public GameObject[] quests;
-    public GameObject[] questBoards;
-    public Button_Instantiate newQuestList;
-    public Button_Instantiate newQuest;
-    public Button_Instantiate newEntry;
-    public string[] saveFiles;
-    public int questNameID;
+    [Header ("Buffer")]
+    public Board boardFile;
+
+    [Header ("Sub-Buffer")]
+    public string[] FQSPs; 
+
+    [Header ("Dev Test Controls")]
+    public bool save;
+    public bool load;
+        //System.IO.Directory.GetFiles(dataPath, "*.fqsp");
 
 
-    public void Awake()
+    private void Update()
     {
-        questNameID = 0;
-    }
-
-
-    public void Update()
-    {
-    }
-
-
-    IEnumerator SaveDelay()
-    {
-        yield return new WaitForSeconds(0.4f);
-        questNameID = 0;
-        Save();
-    }
-
-
-    IEnumerator FinishPreSaveData()
-    {
-        yield return new WaitForSeconds(0.1f);
-        if (questLists.Length > 0)
+        if (save)
         {
-            for (int i = 0; i < questLists.Length; i++)
-            {
-                activeSave.questListData[i].listName = questLists[i].GetComponent<QuestList_Data>().questlistName.text; // Save the quest list names
-                System.Array.Resize(ref activeSave.questListData[i].questData, questLists[i].GetComponent<QuestList_Data>().questsInList);
-
-                for (int ii = 0; ii < activeSave.questListData[i].questData.Length; ii++)
-                {
-                    activeSave.questListData[i].questData[ii].questName = quests[questNameID].GetComponent<Quest_Data>().titleObject.text; // Save the quest list names
-                    questNameID++;
-                }
-            }
+            SaveBoard();
+            save = false;
         }
-
-        if (quests.Length > 0)
+        if (load)
         {
-
-        }
-        StartCoroutine("SaveDelay");
-    }
-
-    IEnumerator FinishQuestBoards()
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        if (activeSave.boardName.Length > 0)
-        {
-            for (int i = 0; i < activeSave.boardName.Length; i++)
-            {
-                string dataPath = Application.persistentDataPath;
-                activeSave.boardName[i] = saveFiles[i].Replace(dataPath + "/", "");
-                activeSave.boardName[i] = activeSave.boardName[i].Replace(".fqsp", "");
-                questBoards[i].GetComponent<QuestBoard_Data>().bufferedName = activeSave.boardName[i]; // Load the quest list names
-            }
-        }
-    }
-
-    IEnumerator FinishPreLoadData()
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        if (activeSave.questListData.Length > 0)
-        {
-            for (int i = 0; i < activeSave.questListData.Length; i++)
-            {
-                questLists[i].GetComponent<QuestList_Data>().bufferedName = activeSave.questListData[i].listName; // Load the quest list names
-                //questLists[i].GetComponent<QuestList_Data>().questsInList = ;// !!!!!!!!!!!!!!!!!!!!!
-                //System.Array.Resize(ref activeSave.questListData[i].questData, questLists[i].GetComponent<QuestList_Data>().questsInList);
-                for (int ii = 0; ii < activeSave.questListData[i].questData.Length; ii++)
-                {
-                    questLists[i].GetComponent<QuestList_Data>().newQuestButton.InstantiateObject();
-                    questLists[i].GetComponent<QuestList_Data>().questsInListBuffered += 1;
-                }
-            }
+            LoadBoard();
+            load = false;
         }
     }
 
 
-    IEnumerator FinishPreLoadData2()
-    {
-        yield return new WaitForSeconds(0.4f);
-        quests = GameObject.FindGameObjectsWithTag("Quest");
-        if (activeSave.questListData.Length > 0)
-        {
-            for (int i = 0; i < activeSave.questListData.Length; i++)
-            {
-                //for (int ii = 0; ii < activeSave.questListData[i].questData.Length; ii++)
-                //{
-                //    quests[ii].GetComponent<Quest_Data>().bufferedName = activeSave.questListData[i].questData[ii].questName; // Load the quest names
-                //}
-
-                for (int ii = 0; ii < activeSave.questListData[i].questData.Length; ii++)
-                {
-                    quests[questNameID].GetComponent<Quest_Data>().bufferedName = activeSave.questListData[i].questData[ii].questName; // Load the quest list names
-                    questNameID++;
-                }
-            }
-        }
-        questNameID = 0;
-    }
-
-    public void findSaveFiles()
+    // Save the current buffer as a file
+    public void SaveBoard()
     {
         string dataPath = Application.persistentDataPath;
-        saveFiles = System.IO.Directory.GetFiles(dataPath, "*.fqsp");
-
-        for (int i = 0; i < saveFiles.Length; i++)
-        {
-            newEntry.InstantiateObject();
-        }
-        questBoards = GameObject.FindGameObjectsWithTag("QuestBoard");
-        System.Array.Resize(ref activeSave.boardName, questBoards.Length);
-        StartCoroutine("FinishQuestBoards");
-    }
-
-    public void PreSaveData()
-    {
-        questNameID = 0;
-        questLists = GameObject.FindGameObjectsWithTag("QuestList");
-        quests = GameObject.FindGameObjectsWithTag("Quest");
-        System.Array.Resize(ref activeSave.questListData, questLists.Length);
-        StartCoroutine("FinishPreSaveData");
-    }
-
-
-    public void PreLoadData()
-    {
-        for (int i = 0; i < activeSave.questListData.Length; i++)
-        {
-            newQuestList.InstantiateObject();
-        }
-        questLists = GameObject.FindGameObjectsWithTag("QuestList");
-        quests = GameObject.FindGameObjectsWithTag("Quest");
-        //System.Array.Resize(ref activeSave.listName, questLists.Length);
-        //System.Array.Resize(ref activeSave.listPosition, questLists.Length);
-        //System.Array.Resize(ref activeSave.questInlist, questLists.Length);
-        StartCoroutine("FinishPreLoadData");
-        StartCoroutine("FinishPreLoadData2");
-    }
-
-
-    // Save the game data to the current save profile
-    public void Save()
-    {
-        questNameID = 0;
-        string dataPath = Application.persistentDataPath;
-        var serializer = new XmlSerializer(typeof(QuestLogData));
-        var stream = new FileStream(dataPath + "/" + activeSave.saveProfileName + ".fqsp", FileMode.Create);
-        serializer.Serialize(stream, activeSave);
+        var serializer = new XmlSerializer(typeof(Board));
+        var stream = new FileStream(dataPath + "/" + boardFile.boardName + ".fqsp", FileMode.Create);
+        serializer.Serialize(stream, boardFile);
         stream.Close();
-        Debug.Log("[ID004 FQ]: " + "Saved information to .fqsp");
     }
+    
 
-
-    // Load the game data to the current save profile
-    public void Load()
+    // Load a boards file data into the buffer
+    public void LoadBoard()
     {
         string dataPath = Application.persistentDataPath;
-        if (System.IO.File.Exists(dataPath + "/" + activeSave.saveProfileName + ".fqsp"))
+        if (System.IO.File.Exists(dataPath + "/" + boardFile.boardName + ".fqsp"))
         {
-            var serializer = new XmlSerializer(typeof(QuestLogData));
-            var stream = new FileStream(dataPath + "/" + activeSave.saveProfileName + ".fqsp", FileMode.Open);
-            activeSave = serializer.Deserialize(stream) as QuestLogData;
+            var serializer = new XmlSerializer(typeof(Board));
+            var stream = new FileStream(dataPath + "/" + boardFile.boardName + ".fqsp", FileMode.Open);
+            boardFile = serializer.Deserialize(stream) as Board;
             stream.Close();
-            Debug.Log("[ID004 FQ]: " + "Loaded information from .fqsp");
-            PreLoadData();
-            hasLoaded = true;
         }
     }
-
-
-    public void DeleteSaveProfile()
+    
+    
+    public void DeleteBoard()
     {
         string dataPath = Application.persistentDataPath;
-        if (System.IO.File.Exists(dataPath + "/" + activeSave.saveProfileName + ".fqsp"))
+        if (System.IO.File.Exists(dataPath + "/" + boardFile.boardName + ".fqsp"))
         {
-            File.Delete(dataPath + "/" + activeSave.saveProfileName + ".fqsp");
-            Debug.Log("[ID004 FQ]: " + "Deleted current .fqsp");
+            File.Delete(dataPath + "/" + boardFile.boardName + ".fqsp");
         }
     }
 
-    [System.Serializable]
-    public class QuestLogData
+
+    // Reset the buffer to it's default values
+    public void ClearBuffer()
     {
-        public string saveProfileName;
-        [Header("Boards")]
-        public string[] boardName; // The title of the list
-        [Header("Lists")]
-        //public string[] listName; // The title of the list
-        //public int[] listPosition; // The position of the list in the menu
-        //public int[] questInlist; // The position of the list in the menu
-        //[Header("Quests")]
-        //public string[] questName; // The title of the list
-        public QuestListData[] questListData;
+            boardFile.boardName = "";
+            boardFile.boardColor = new Color (0,0,0,0);
+            boardFile.boardPosition = 0;
+            Array.Resize(ref boardFile.boardSections, 0);
+            Array.Resize(ref boardFile.boardQuests, 0);
+            Array.Resize(ref FQSPs, 0);
+
     }
 
-    [System.Serializable]
-    public class QuestListData
+
+    public void InstantiateBoards()
     {
-        public string listName; // The title of the list
-        //public int listPosition; // The position of the list in the menu
-        public QuestData[] questData;
     }
 
-    [System.Serializable]
-    public class QuestData
-    {
-        public string questName; // The title of the list
-        //public int questPosition; // The position of the list in the menu
-    }
 
-    //[System.Serializable]
-    //public class QuestData
-    //{
-    //    public int[] parentListPosition; // The lists position that the quest is from
-    //    public string questName; // the title of the quest
-    //    public string questDueDate; // The date when the quest should be completed by
-    //    public string questDueTime; // The time when the quest should be completed by
-    //    public int questPriority; // The priority label of the quest
-    //    public string questDescription; // The details about the quest
-    //}
+    [System.Serializable]
+    public class Board
+    {
+        public string boardName; // The title of the project or main group (example: Chores)
+        public Color boardColor; // The color of the board on the board selection screen
+        public int boardPosition; // The order in which the board appears on the board selection screen (starting from least to greatest)
+
+        public Section[] boardSections;
+        public Quest[] boardQuests;
+    }
+    
+    [System.Serializable]
+    public class Section
+    {
+        public string sectionName; // The title of the section (example: School)
+        public int sectionPosition; // The order in which the section appears on the board screen (starting from least to greatest)
+    }
+    
+    [System.Serializable]
+    public class Quest
+    {
+        public string questName; // The title of the task (example: Finish homework)
+        public int sectionPosition; // The subsection pannel that the task appears under (starting from left to right) basicaly the quests parent category
+        public int questPosition; // The order in which the quests appear under a subsection (starting from least to greatest)
+    }
 }
